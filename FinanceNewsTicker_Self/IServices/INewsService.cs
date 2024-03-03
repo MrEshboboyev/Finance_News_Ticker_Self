@@ -1,8 +1,11 @@
-﻿namespace FinanceNewsTicker_Self.IServices
+﻿using FinanceNewsTicker_Self.Models;
+using Newtonsoft.Json;
+
+namespace FinanceNewsTicker_Self.IServices
 {
     public interface INewsService
     {
-        void GetFinanceNews();
+        FinanceNews GetFinanceNews();
     }
 
     public class NewsService : INewsService
@@ -14,7 +17,7 @@
             _configuration = configuration;
         }
 
-        public void GetFinanceNews()
+        public FinanceNews GetFinanceNews()
         {
             string apiKey = _configuration.GetValue<string>("API_KEY");
             string baseUrl = _configuration.GetValue<string>("API_URL");
@@ -28,6 +31,16 @@
                 if(response.IsSuccessStatusCode)
                 {
                     var result = response.Content.ReadAsStringAsync().Result;
+
+                    return JsonConvert.DeserializeObject<FinanceNews>(result);
+                }
+                else
+                {
+                    return new FinanceNews()
+                    {
+                        Data = new List<Datum>(),
+                        Pagination = new Pagination()
+                    };
                 }
             }
         }
