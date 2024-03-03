@@ -1,4 +1,5 @@
 using FinanceNewsTicker_Self.IServices;
+using FinanceNewsTicker_Self.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -8,6 +9,7 @@ namespace FinanceNewsTicker_Self.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly INewsService _newsService;
+        public FinanceNews news;
 
         public IndexModel(ILogger<IndexModel> logger,
             INewsService newsService)
@@ -18,7 +20,7 @@ namespace FinanceNewsTicker_Self.Pages
 
         public void OnGet()
         {
-            var news = _newsService.GetFinanceNews();
+            news = _newsService.GetFinanceNews();
         }
     }
 }

@@ -48,7 +48,7 @@ namespace FinanceNewsTicker_Self.Models
         public Pagination Pagination { get; set; }
 
         [JsonProperty("data")]
-        public List<Datum> Data { get; set; }
+        public List<NewsArticle> Data { get; set; }
     }
 
 
