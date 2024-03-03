@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "News";
 
-    var offset = Model.news.Pagination.Count + Model.news.Pagination.Offset;
+    var nextOffset = Model.news.Pagination.Count + Model.news.Pagination.Offset;
 
     <table class="table">
         <thead>
@@ -31,4 +31,6 @@
             }
         </tbody>
     </table>
+
+    <a asp-page-handler="LoadMoreNews" asp-route-offset="@nextOffset" class="btn btn-secondary btn-lg">Load more</a>
 }
