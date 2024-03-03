@@ -5,7 +5,7 @@ namespace FinanceNewsTicker_Self.IServices
 {
     public interface INewsService
     {
-        FinanceNews GetFinanceNews();
+        FinanceNews GetFinanceNews(int offset);
     }
 
     public class NewsService : INewsService
@@ -17,7 +17,7 @@ namespace FinanceNewsTicker_Self.IServices
             _configuration = configuration;
         }
 
-        public FinanceNews GetFinanceNews()
+        public FinanceNews GetFinanceNews(int offset)
         {
             string apiKey = _configuration.GetValue<string>("API_KEY");
             string baseUrl = _configuration.GetValue<string>("API_URL");
@@ -26,7 +26,9 @@ namespace FinanceNewsTicker_Self.IServices
             {
                 client.BaseAddress = new Uri(baseUrl);
 
-                var response = client.GetAsync("?apikey=" + apiKey).Result;
+                var parameters = String.Format("?apikey={0}&offset={1}&date={2}&sort={3}", apiKey, offset, "today", "desc");
+
+                var response = client.GetAsync(parameters).Result;
 
                 if(response.IsSuccessStatusCode)
                 {
