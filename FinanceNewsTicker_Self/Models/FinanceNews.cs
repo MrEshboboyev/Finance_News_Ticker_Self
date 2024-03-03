@@ -3,7 +3,7 @@
 namespace FinanceNewsTicker_Self.Models
 {
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
-    public class Datum
+    public class NewsArticle
     {
         [JsonProperty("title")]
         public string Title { get; set; }

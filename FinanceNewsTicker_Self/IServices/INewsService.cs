@@ -38,7 +38,7 @@ namespace FinanceNewsTicker_Self.IServices
                 {
                     return new FinanceNews()
                     {
-                        Data = new List<Datum>(),
+                        Data = new List<NewsArticle>(),
                         Pagination = new Pagination()
                     };
                 }
